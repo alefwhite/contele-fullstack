@@ -10,7 +10,7 @@ RUN chown -R node /app
 
 COPY --chown=node:node ["package.json", "package-lock.json", "./"]
 
-RUN runuser -u node -- npm ci && mv node_modules ../
+RUN run user -u node -- npm ci && mv node_modules ../
 
 USER node
 
