@@ -122,7 +122,7 @@ paths:
       operationId: deleteUserHandler
       parameters:
         - name: user_id
-          in: path
+          in: query
           type: integer
           required: true
       responses:
