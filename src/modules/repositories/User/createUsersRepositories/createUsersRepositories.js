@@ -11,9 +11,7 @@ const createUserRepositories = async ({
     const { transaction } = await getTransaction();
 
     try {
-        const {
-            user_created
-        } = await transaction('users').insert(user)
+        const user_created = await transaction('users').insert(user)
         
         const has_response = Array.isArray(user_created) && user_created.length > 0;
 
