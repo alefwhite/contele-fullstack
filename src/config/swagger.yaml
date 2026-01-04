@@ -80,6 +80,7 @@ paths:
           description: "success"
           schema:
             $ref: "#/definitions/user"
+  /user/{user_id}:
     put:
       tags:
         - "Users"
@@ -87,6 +88,10 @@ paths:
       summary: update user
       operationId: updateUserHandler
       parameters:
+        - name: user_id
+          in: path
+          type: "integer"
+          required: true
         - in: body
           name: user
           description: update user
@@ -94,13 +99,10 @@ paths:
             additionalProperties: false
             type: "object"
             required:
-              - "id"
               - "full_name"
               - "user_email"
               - "user_password"
             properties:
-              id:
-                type: "integer"
               full_name:
                 type: "string"
               user_email:
@@ -120,7 +122,7 @@ paths:
       operationId: deleteUserHandler
       parameters:
         - name: user_id
-          in: query
+          in: path
           type: integer
           required: true
       responses:
