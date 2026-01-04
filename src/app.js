@@ -1,4 +1,6 @@
 'use strict';
+require('dotenv').config();
+
 const cors = require('cors');
 const SwaggerExpress = require('swagger-express-mw');
 const SwaggerUi = require('swagger-ui-express');
@@ -10,12 +12,16 @@ const port = Number(process.env.PORT || 8089)
 const app = express();
 
 const whitelist = [
-  // TODO whitelist
+  'http://localhost:8080',
+  'http://localhost:8081',
 ]
 
 app.use(cors({
   origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
     const allowed = whitelist.indexOf(origin) !== -1
+
     if (allowed) return callback(null, true);
 
     callback(new Error('Not allowed by CORS'))
