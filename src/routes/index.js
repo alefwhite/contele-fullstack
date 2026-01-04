@@ -9,7 +9,7 @@ const createRoutes = (handlers) => {
   router.get('/user', handlers.listUserHandler);
   router.post('/user', handlers.createUserHandler);
   router.put('/user/:user_id', handlers.updateUserHandler);
-  router.delete('/user', handlers.deleteUserHandler);
+  router.delete('/user/:user_id', handlers.deleteUserHandler);
 
   // Post routes
   router.get('/post', handlers.listPostHandler);
