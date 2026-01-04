@@ -7,9 +7,14 @@ const SwaggerUi = require('swagger-ui-express');
 const express = require('express');
 const { buildHandlers } = require('./modules');
 const { handlers } = buildHandlers();
+const createRoutes = require('./routes');
 const port = Number(process.env.PORT || 8089)
 
 const app = express();
+
+// Middleware para parsear JSON e URL-encoded bodies
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const whitelist = [
   'http://localhost:8080',
@@ -38,7 +43,11 @@ const onSwaggerCreated = (error, swaggerExpress) => {
 
   const swaggerDocument = swaggerExpress.runner.swagger;
   app.use('/api/v1/docs', SwaggerUi.serve, SwaggerUi.setup(swaggerDocument));
-  swaggerExpress.register(app); // register middlewares
+
+  //  rotas manualmente
+  const routes = createRoutes(handlers);
+  app.use('/api/v1', routes);
+
   app.listen(port, () => console.info('onAppStart', { port }));
 };
 
