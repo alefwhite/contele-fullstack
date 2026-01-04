@@ -3,7 +3,7 @@ const httpStatusCodes = require('http-status-codes');
 const { httpErrorHandler } = require("../../common/handlers");
 const { createUserService } = require('../../services');
 
-const createUserHandler = (req, res, next) => {
+const createUserHandler = async (req, res) => {
     try{
         const {
             user_email,
@@ -11,7 +11,7 @@ const createUserHandler = (req, res, next) => {
             full_name
         } = req.body
 
-        const created_user = createUserService({
+        const created_user = await createUserService({
             user_email,
             user_password,
             full_name
