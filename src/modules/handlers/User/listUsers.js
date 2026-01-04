@@ -12,10 +12,10 @@ const listUserHandler = async (req, res, next) => {
         const {
             user_id
         } = req.query;
-        
-        const has_user_id = !!user_id && Number.isFinite(+user_id) && false;
 
-        const user_response = has_user_id && getUserByIdService({ user_id });
+        const has_user_id = !!user_id && Number.isFinite(+user_id);
+
+        const user_response = has_user_id && await getUserByIdService({ user_id });
 
         const users_response = !has_user_id && await getAllUsersService();
 
