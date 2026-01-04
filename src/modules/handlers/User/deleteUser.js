@@ -9,7 +9,7 @@ const deleteUserHandler = async (req, res, next) => {
 
         const {
             user_id
-        } = req.query;
+        } = req.params;
 
         const {
             deletedUser
