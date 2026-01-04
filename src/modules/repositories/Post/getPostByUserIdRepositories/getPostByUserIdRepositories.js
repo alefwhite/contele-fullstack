@@ -16,7 +16,7 @@ const getPostByUserIdRepositories = async ({
         }
     }
 
-    const posts = response.forEach(post => post);
+    const posts = response.map(post => post);
 
     return {
         posts

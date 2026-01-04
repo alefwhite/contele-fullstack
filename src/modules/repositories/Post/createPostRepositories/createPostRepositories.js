@@ -13,7 +13,7 @@ const createPostRepositories = async ({
     try {
         const post_created = await transaction('posts').insert(post)
         
-        const has_response = !Array.isArray(post_created) && post_created.length > 0;
+        const has_response = Array.isArray(post_created) && post_created.length > 0;
 
         if (!has_response) {
             return {
@@ -21,6 +21,7 @@ const createPostRepositories = async ({
             }
         }
 
+        await commitTransaction({transaction})
 
         return {
             post_created
